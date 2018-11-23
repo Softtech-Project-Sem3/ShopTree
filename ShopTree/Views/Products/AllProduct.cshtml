@@ -1,0 +1,112 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<ShopTree.Models.ProductViewModel>
+
+<div id="collection">
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="breadcrumb clearfix">
+                        <ul>
+                            <li class="home">
+                                <a title="Đến trang chủ" href="@Url.Action("Index", "Home")" itemprop="url"><span itemprop="title">Trang chủ</span></a>
+                            </li>
+                            <li class="icon-li"><strong>Sản phẩm</strong> </li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                        <h1 title="products" class="page_heading ">
+                            Tất cả sản phẩm
+                        </h1>
+
+                        <div class="product_list grid clearfix">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow" style="visibility: visible; animation-name: zoomIn;">
+                                    <div class="product-block product-resize m-b-20 fixheight" style="height: 295px;">
+                                        <div class="product-image image-resize" style="height: 208px;">
+                                            <div class="sold-out"><span style="margin-top:10px;">Hot</span></div>
+                                            <a href="@Url.Action("Detail", "Products", new { productId = item.ProductId })">
+                                                <img class="first-img" src="~/Assets/images/product/@item.ImageUrl">
+                                            </a>
+                                            <div class="product-actions hidden-xs">
+                                                <div class="btn-add-to-cart" proid="@item.ProductId" proname="@item.ProductName" quantity="1" price="@item.Price" proimg="~/Assets/images/product/@item.ImageUrl">
+                                                    <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="btn_quickview">
+                                                    <a class="quickview" href="@Url.Action("Detail", "Products", new { productId = item.ProductId })"><i class="fa fa-eye"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-info text-center m-t-xxs-20">
+                                            <h3 class="pro-name">
+                                                <a href="@Url.Action("Detail", "Products", new { productId = item.ProductId })">@item.ProductName</a>
+                                            </h3>
+                                            <div class="pro-prices">
+                                                <span class="pro-price">@item.Price.Value.ToString("C2")</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="icon-loading" style="display: none;">
+                                <div class="uil-ring-css">
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pageinate">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="pagination">
+                                <div class="row">
+                                    <div>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                                        <span>
+                                            @Html.PagedListPager(Model, page => Url.Action("AllProduct", "Products", new { page }))
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="pageinate">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="pagination">
+                                <div class="row">
+                                    <div>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                                        <span>
+                                            @Html.PagedListPager(Model, page => Url.Action("AllProduct", "Products", new PagedListRenderOptions
+                                       {
+                                           FunctionToTransformEachPageLink = (liTag, aTag) =>
+                                           {
+                                               aTag.Attributes.Add("page-node", aTag.InnerHtml);
+                                               liTag.InnerHtml = aTag.ToString();
+                                               return liTag;
+                                           }
+                                       }))
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+
+                @{Html.RenderAction("_CategoriesRight", "Home");}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".menu-quick-select ul").hide();
+        $(".menu-quick-select").hover(function () {
+            $(".menu-quick-select ul").show();
+        }, function () {
+            $(".menu-quick-select ul").hide();
+        });
+    });
+</script>

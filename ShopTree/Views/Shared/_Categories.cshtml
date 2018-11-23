@@ -1,0 +1,11 @@
+﻿@model List<ShopTree.Models.Category>
+<ul class='nav_verticalmenu'>
+    @foreach (var item in Model)
+    {
+        <li class="level0">
+            <a href="@Url.Action("GetProductByCategoryId", "Products", new { categoryId = item.Id })">
+                <img class='icon-menu' src="~/Assets/images/icon/@item.ImageUrl"><span>@item.Name</span>
+            </a>
+        </li>
+    }
+</ul>

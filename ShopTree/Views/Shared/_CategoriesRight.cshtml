@@ -1,0 +1,63 @@
+﻿@model List<ShopTree.Models.Category>
+
+<div class="col-md-3">
+    <div class="menu-product">
+        <h3>
+            <span>
+                Sản phẩm
+            </span>
+        </h3>
+        <ul class="level0">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a href="@Url.Action("GetProductByCategoryId", "Products", new { categoryId = item.Id })">
+                        <i class="fa fa-arrow-circle-right"></i><span style="margin-left: 5px">@item.Name</span>
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </div>
+
+    <!--Begin-->
+    <div class="box-sale-policy ng-scope">
+        <h3><span>Chính sách bán hàng</span></h3>
+        <div class="sale-policy-block">
+            <ul>
+                <li>Giao hàng TOÀN QUỐC</li>
+                <li>Thanh toán khi nhận hàng</li>
+                <li>Đổi trả trong <span>15 ngày</span></li>
+                <li>Hoàn ngay tiền mặt</li>
+                <li>Chất lượng đảm bảo</li>
+                <li>Miễn phí vận chuyển:<span>Đơn hàng từ 3 món trở lên</span></li>
+            </ul>
+        </div>
+        <div class="buy-guide">
+            <h3>Hướng Dẫn Mua Hàng</h3>
+            <ul>
+                <li>
+                    Mua hàng trực tiếp tại website
+                    <b class="ng-binding"> http://www.webtretho.com</b>
+                </li>
+                <li>
+                    Gọi điện thoại <strong class="ng-binding">
+                        0123 456 789
+                    </strong> để mua hàng
+                </li>
+                <li>
+                    Mua tại Trung tâm CSKH:<br>
+                    <strong class="ng-binding">38 Yên Bái, Tp Đà Nẵng</strong>
+                </li>
+                <li>
+                    Mua sỉ/buôn xin gọi 
+                    <strong class="ng-binding">
+                        0123 456 789
+                    </strong> để được hỗ trợ.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--End-->
+</div>
+<!--End right menu-->

@@ -1,0 +1,36 @@
+﻿@model List<ShopTree.Models.ProductViewModel>
+<div class="product-list">
+
+    @foreach (var item in Model)
+    {
+        <!--Product item-->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-wrapper zoomIn wow">
+            <div class="product-block product-resize">
+                <div class="product-image image-resize">
+                    <div class="sold-out">Hot</div>
+                    <a href="@Url.Action("Detail","Products",new { productId = item.ProductId})">
+                        <img class="first-img" src="~/Assets/images/product/@item.ImageUrl">
+                    </a>
+                    <div class="product-actions hidden-xs">
+                        <div class="btn-add-to-cart" proid="@item.ProductId" proname="@item.ProductName" quantity="1" price="@item.Price" proimg="~/Assets/images/product/@item.ImageUrl">
+                            <a href="javascript:void(0);"><i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="btn_quickview">
+                            <a class="quickview" href="@Url.Action("Detail","Products",new { productId = item.ProductId})"><i class="fa fa-eye"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info text-center m-t-xxs-20">
+                    <h3 class="pro-name">
+                        <a href="@Url.Action("Detail","Products",new { productId = item.ProductId})">@item.ProductName</a>
+                    </h3>
+                    <div class="pro-prices">
+                        <span class="pro-price">@item.Price.Value.ToString("C2")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End product item-->
+    }
+
+</div>
